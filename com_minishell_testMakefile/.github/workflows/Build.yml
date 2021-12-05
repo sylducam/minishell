@@ -1,0 +1,34 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Executable on Linux
+    steps:
+      - name: Checkout repo & libft
+        uses: actions/checkout@v2
+        with:
+          # token: ${{ secrets.CI_TOKEN }}
+          submodules: true
+      - name: Make
+        run: make
+      - name: Clean
+        run: |
+            make clean
+            make fclean
+  build_macos:
+    runs-on: macos-latest
+    name: Build Executable on macOS
+    steps:
+      - name: Checkout repo & libft
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Make
+        run: make
+      - name: Clean
+        run: |
+            make clean
+            make fclean
